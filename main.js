@@ -58,10 +58,11 @@ function setXpBasedOnQuest(item)
 
   leveling.XP += xpToGain;
 
-  if (leveling.XP >= leveling.maxXP)
+  while (leveling.XP >= leveling.maxXP)
   {
-    leveling.XP -= leveling.maxXP;
+    leveling.XP -= leveling.maxXP; // carry over the extra xp from level up
     leveling.level += 1;
+    updateMaxXpOnNewLevel(true);
     console.log(`Level Up! You are now level ${leveling.level}`);
   }
   console.log(`XP added: ${xpToGain}, Current XP: ${leveling.XP}`);
@@ -79,10 +80,12 @@ function handleXpOnListChange(addXP = true)
       leveling.XP += 2;
       console.log("Current XP", leveling.XP);
     }
-    else if (leveling.XP >= leveling.maxXP)
+
+    while (leveling.XP >= leveling.maxXP)
     {
-      leveling.XP = 0;
+      leveling.XP -= leveling.maxXP;
       leveling.level += 1;
+      updateMaxXpOnNewLevel(true);
       console.log("You are now level", leveling.level);
     }
   }
@@ -93,6 +96,15 @@ function handleXpOnListChange(addXP = true)
 
     if (leveling.XP < 0)
       leveling.XP = 0;
+  }
+}
+
+function updateMaxXpOnNewLevel(levelUp = false)
+{
+  if (levelUp)
+  {
+    leveling.maxXP = Math.floor(Math.random() * 250 - 150 + 1) + 150;
+    console.log(`New max xp is: ${leveling.maxXP}`);
   }
 }
 //#endregion
