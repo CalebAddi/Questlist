@@ -66,7 +66,6 @@ handleQuestSelection();
 function setXpBasedOnQuest(item)
 {
   let xpToGain = 0;
-  let questType = '';
 
   if (item.textContent.includes('Major Quest'))
   {
@@ -84,9 +83,10 @@ function setXpBasedOnQuest(item)
   }
 
   leveling.XP += xpToGain;
+
   if (leveling.XP >= leveling.maxXP)
   {
-    leveling.XP = 0;
+    leveling.XP -= leveling.maxXP;
     leveling.level += 1;
     console.log(`Level Up! You are now level ${leveling.level}`);
   }
@@ -147,6 +147,8 @@ function addItem()
   majorQ.checked = false;
   sideQ.checked = false;
   input.value = '';
+
+  handleXpOnListChange(true);
 }
 
 function newListElem()
@@ -208,8 +210,8 @@ function confirmChecklist()
 
       if (checkbox && checkbox.checked) 
       {
-        setXpBasedOnQuest(item); // Correctly passing the item to the function
-        list.removeChild(item); // Remove the item from the list
+        setXpBasedOnQuest(item);
+        list.removeChild(item); 
       }
     }
   });
