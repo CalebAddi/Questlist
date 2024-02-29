@@ -7,32 +7,6 @@ const leveling = {
   maxLevel: 55
 }
 
-function handleXpOnListChange(addXP = true)
-{
-  if (addXP)
-  {
-    if (leveling.XP < leveling.maxXP)
-    {
-      leveling.XP += 2;
-      console.log("Current XP", leveling.XP);
-    }
-    else if (leveling.XP >= leveling.maxXP)
-    {
-      leveling.XP = 0;
-      leveling.level += 1;
-      console.log("You are now level", leveling.level);
-    }
-  }
-  else
-  {
-    // Decrement XP for reset
-    leveling.XP -= 2;
-
-    if (leveling.XP < 0)
-      leveling.XP = 0;
-  }
-}
-
 // Select the input, all buttons, and ul
 const input = document.getElementById('checklist');
 const addBtn = document.getElementById('addList');
@@ -42,8 +16,8 @@ const sideQ = document.getElementById('sideQuest');
 const reset = document.getElementById('reset-btn');
 const confirm = document.getElementById('confirm-btn');
 
+//#region - XP, Level, and Quest Handling -
 // Handle xp based on quest selection
-
 function handleQuestSelection()
 {
   majorQ.addEventListener('change', function()
@@ -96,6 +70,34 @@ function setXpBasedOnQuest(item)
   sideQ.checked = false;
 }
 
+function handleXpOnListChange(addXP = true)
+{
+  if (addXP)
+  {
+    if (leveling.XP < leveling.maxXP)
+    {
+      leveling.XP += 2;
+      console.log("Current XP", leveling.XP);
+    }
+    else if (leveling.XP >= leveling.maxXP)
+    {
+      leveling.XP = 0;
+      leveling.level += 1;
+      console.log("You are now level", leveling.level);
+    }
+  }
+  else
+  {
+    // Decrement XP for reset
+    leveling.XP -= 2;
+
+    if (leveling.XP < 0)
+      leveling.XP = 0;
+  }
+}
+//#endregion
+
+//#region - List Element Handling -
 // Create new list item when clicking Add Button or Enter
 function addItem()
 {
@@ -217,3 +219,4 @@ function confirmChecklist()
   });
 }
 confirmChecklist();
+//#endregion
