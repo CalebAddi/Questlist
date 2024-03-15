@@ -187,6 +187,25 @@ function newListElem()
 }
 newListElem();
 
+// List item listeners
+function toggleCheckedState(li)
+{
+  li.classList.toggle('checked');
+  const checkbox = li.querySelector('.check-off-item');
+  checkbox.checked = !checkbox.checkbox;
+}
+
+function setupListItemListeners()
+{
+  list.addEventListener('click', function(e)
+  {
+    const targetLi = e.target.closest('li');
+    if (targetLi)
+      toggleCheckedState(targetLi);
+  });
+}
+setupListItemListeners();
+
 // Clear list element on reset
 function clearOnReset()
 {
