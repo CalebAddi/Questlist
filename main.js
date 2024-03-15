@@ -103,7 +103,9 @@ function updateMaxXpOnNewLevel(levelUp = false)
 {
   if (levelUp)
   {
-    leveling.maxXP = Math.floor(Math.random() * 250 - 150 + 1) + 150;
+    let baseMinXP = 150 + (leveling.level - 2) * 200;
+    let baseMaxXP = 250 + (leveling.level - 2) * 200;
+    leveling.maxXP = Math.floor(Math.random() * (baseMaxXP - baseMinXP + 1) + baseMinXP);
     console.log(`New max xp is: ${leveling.maxXP}`);
   }
 }
@@ -115,10 +117,17 @@ function addItem()
 {
   const inputVal = input.value.trim(); // trim is used to remove any whitespace from the input to keep it from being added
   const currItems = list.getElementsByTagName('li'); // current li elems
+  const specialChar = /[!@#$%^&*(),.?":{}|<>\/]/;
 
-  if (!inputVal)
+  if (!inputVal) // Prevent from adding empty item
   {
     alert("Text is empty! Please add text to the input...");
+    return;
+  }
+
+  if (specialChar.test(inputVal)) // Check for special characters
+  {
+    alert("Please do not use special characters in list");
     return;
   }
 
@@ -148,7 +157,7 @@ function addItem()
 
   // Text Node
   const textSpan = document.createElement('span');
-  textSpan.textContent = `${inputVal} - `;
+  textSpan.textContent = `${inputVal} | `;
   li.appendChild(textSpan);
 
   // Quest Type Text
