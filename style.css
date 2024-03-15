@@ -42,21 +42,6 @@ li
   margin-left: -2em;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -77,67 +62,75 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.addBtn {
-  border-radius: 8px;
-  /* border: 1px solid transparent; */
-  padding: 1px;
-  width: 25%;
-  background: rgb(221, 172, 172, .7);
-  color: #1a1a1a;
-  float: left;
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
   text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.addBtn:hover {
-  background-color: rgb(221, 172, 172, .5);
-}
-
-.mylist
-{
-  margin-top: 5em;
-  margin-bottom: 5em;
-}
-
-.quest-checkbox
-{
-  display: grid;
-  margin-top: 1em;
-  margin-left: 4em;
-
-  .majorquest
+  @media (min-width:768px) 
   {
-    position: relative;
-    left: -5.5em;
+    grid-row: span 2;
   }
-  .sidequest
+
+  .main
   {
-    position: relative;
-    right: -1.8em;
-    top: -1.5em;
-  }
-}
+    @media (min-width:768px)
+    {
+      min-height: 58vh;
+      max-height: 58vh;
+      overflow: auto;
+    }
 
-#reset-btn
-{
-  margin-right: .55em;
-}
-#confirm-btn
-{
-  margin-left: .55em;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+    .addBtn {
+      border-radius: 8px;
+      /* border: 1px solid transparent; */
+      padding: 1px;
+      width: 25%;
+      background: rgb(221, 172, 172, .7);
+      color: #1a1a1a;
+      float: left;
+      text-align: center;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .addBtn:hover {
+      background-color: rgb(221, 172, 172, .5);
+    }
+    
+    .mylist
+    {
+      margin-top: 5em;
+      margin-bottom: 5em;
+    }
+    
+    .quest-checkbox
+    {
+      display: grid;
+      margin-top: 1em;
+      margin-left: 4em;
+    
+      .majorquest
+      {
+        position: relative;
+        left: -5.5em;
+      }
+      .sidequest
+      {
+        position: relative;
+        right: -1.8em;
+        top: -1.5em;
+      }
+    }
+    
+    #reset-btn
+    {
+      margin-right: .55em;
+    }
+    #confirm-btn
+    {
+      margin-left: .55em;
+    }
   }
 }
