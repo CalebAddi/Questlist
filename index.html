@@ -8,6 +8,13 @@
   </head>
   <body>
     <section id="app">
+      <div class="level-display">
+        Current Level: <span id="currentlevel">1</span>
+      </div>
+      <div class="xp-progress">
+        XP Progress: <progress id="xpProgress" value="0" max="100"></progress> <span id="currentXP">0</span>/<span id="maxXP">100</span>
+      </div>
+
       <div class="main">
         <div class="checklist-div">
           <input type="text" id="checklist" placeholder="Add To Checklist...">

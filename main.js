@@ -79,6 +79,7 @@ function handleXpOnListChange(addXP = true)
     {
       leveling.XP += 2;
       console.log("Current XP", leveling.XP);
+      updateLevelDisplay();
     }
 
     while (leveling.XP >= leveling.maxXP)
@@ -93,10 +94,20 @@ function handleXpOnListChange(addXP = true)
   {
     // Decrement XP for reset
     leveling.XP -= 2;
+    updateLevelDisplay();
 
     if (leveling.XP < 0)
       leveling.XP = 0;
   }
+}
+
+function updateLevelDisplay()
+{
+  document.getElementById('currentlevel').textContent = leveling.level;
+  document.getElementById('currentXP').textContent = leveling.XP;
+  document.getElementById('maxXP').textContent = leveling.maxXP;
+  document.getElementById('xpProgress').value = leveling.XP;
+  document.getElementById('xpProgress').max = leveling.maxXP;
 }
 
 function updateMaxXpOnNewLevel(levelUp = false)
@@ -107,8 +118,11 @@ function updateMaxXpOnNewLevel(levelUp = false)
     let baseMaxXP = 250 + (leveling.level - 2) * 200;
     leveling.maxXP = Math.floor(Math.random() * (baseMaxXP - baseMinXP + 1) + baseMinXP);
     console.log(`New max xp is: ${leveling.maxXP}`);
+    updateLevelDisplay();
   }
 }
+updateLevelDisplay();
+
 //#endregion
 
 //#region - List Element Handling -
@@ -177,9 +191,9 @@ function addItem()
 function newListElem()
 {
   addBtn.addEventListener('click', addItem);
-  input.addEventListener('keypress', function(e)
+  document.addEventListener('keypress', function(e)
   {
-    if (e.key === 'Enter')
+    if (e.key === 'Enter' || document.activeElement === majorQ || document.activeElement === sideQ)
     {
       addItem();
     }
@@ -190,9 +204,9 @@ newListElem();
 // List item listeners
 function toggleCheckedState(li)
 {
-  li.classList.toggle('checked');
   const checkbox = li.querySelector('.check-off-item');
-  checkbox.checked = !checkbox.checkbox;
+  li.classList.toggle('checked');
+  checkbox.checked = li.classList.contains('checked');
 }
 
 function setupListItemListeners()
@@ -256,6 +270,7 @@ function confirmChecklist()
         list.removeChild(item); 
       }
     }
+    updateLevelDisplay();
   });
 }
 confirmChecklist();
